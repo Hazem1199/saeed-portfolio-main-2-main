@@ -55,16 +55,35 @@
     // Replace this with your Conversion API Token
     var conversionApiToken = 'EAAEJjelegowBOZBK2ZAQw38SBwpZCIy191UybagFNb600jZCKPY7hOl3BLWJwFDhcIYoYOUyqTXU9sIebfiwTOZCgDj6bPUkCUZCmDZBE84gCmX6t3Ish0PSGjplrI1DGc9dY1CO5zTZBI2ZBIIjyApGCH9HoIqvXwsC8lHD9ktKCM7KeBlRkdC5JexUwFbQ1mzKUBgZDZD';
 
-    // Create a new Facebook Pixel Code Generator instance
-    var pixelCodeGenerator = new FacebookPixelCodeGenerator();
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
 
-    // Set the Conversion API Token
-    pixelCodeGenerator.setConversionApiToken(conversionApiToken);
+    // Set the request method and URL
+    xhr.open('POST', 'https://graph.facebook.com/v13.0/{714271283884214}/events?access_token=' + conversionApiToken);
 
-    // Generate the JavaScript code
-    var javascriptCode = pixelCodeGenerator.generateJavaScriptCode();
+    // Set the request headers
+    xhr.setRequestHeader('Content-Type', 'application/json');
 
-    // Add the JavaScript code to your website
+    // Create the request body
+    var requestBody = {
+      "event": {
+        "name": "Purchase",
+        "value": 100.00
+      }
+    };
+
+    // Send the request
+    xhr.send(JSON.stringify(requestBody));
+
+    // Listen for the response
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Success!
+      } else {
+        // Error!
+      }
+    };
+
 
   </script>
 
